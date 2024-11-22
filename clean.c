@@ -1,7 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void main()
-{
-    printf("hello world");
+int main() {
+
+    float num;
+
+    while (scanf("%f", &num) != EOF) 
+    {
+        printf("%f\n", num);
+    }
+    return 0;
 }
