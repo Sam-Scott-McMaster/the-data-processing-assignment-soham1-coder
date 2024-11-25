@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(int argc, char *argv[]) {
 
     float num;
 
@@ -13,22 +13,23 @@ int main() {
 }
 
 
-float read_data()
+float read_data(int rows, int cols)
+{
+    scanf("%d %d", rows, cols); //obtains #of rows and columns from user
+
+}
+
+float clean_delete(float *a[])
 {
 
 }
 
-float clean_delete(float a[])
+float clean_impute(float *a[])
 {
 
 }
 
-float clean_impute(float a[])
-{
-
-}
-
-void output_data(float a[])
+void output_data(float *a[])
 {
 
 }
