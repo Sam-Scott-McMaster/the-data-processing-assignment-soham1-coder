@@ -9,15 +9,23 @@ This program cleans up data which wil be used for machine learning
 #include <stdlib.h>
 #include <math.h>
 
-int main(int argc, char *argv[]) {
+float **read_data(int *rows,int *cols);
 
-    float num;
+int main(int argc, char *argv[]) 
+{
+    int rows, cols;
 
-    while (scanf("%f", &num) != EOF) 
+    float **data = read_data(&rows, &cols);
+
+    for (int i = 0; i < rows; i++) 
     {
-        printf("%f\n", num);
+        for (int j = 0; j < cols; j++) 
+        {
+            printf("%.2f ", data[i][j]);
+        }
+        printf("\n");
     }
-    return 0;
+    
 }
 
 //reads float values from std input and assigns them to a 2D array
