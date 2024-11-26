@@ -25,7 +25,8 @@ int main(int argc, char *argv[])
         }
         printf("\n");
     }
-    
+
+    free(data);
 }
 
 //reads float values from std input and assigns them to a 2D array
