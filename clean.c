@@ -31,13 +31,13 @@ int main(int argc, char *argv[])
     float **data = read_data(&rows, &cols);
 
     //outputs original data
-    printf("\n");
+    printf("\nORIGINAL DATA:\n");
     output_data(data,rows,cols);
 
     //uses deletion strategy if "-d" flag is used
     if (argc > 1 && strcmp(argv[1], "-d") == 0)
     {
-        printf("\n");
+        printf("\nCLEANED DATA (DELETION):\n");
         cleaned_data = clean_delete(data, rows, cols, &new_rows);
         output_data(cleaned_data,new_rows,cols);
     }
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     //uses imputation strategy otherwise
     else
     {
-        printf("\n");
+        printf("\nCLEANED DATA (IMPUTATION):\n");
         cleaned_data = clean_impute(data, rows, cols); 
         output_data(cleaned_data,rows,cols);
         new_rows = rows; //imputation does not change # of rows
