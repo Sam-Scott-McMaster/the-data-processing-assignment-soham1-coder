@@ -7,36 +7,42 @@ This program cleans up data which wil be used for machine learning
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
+//function prototypes
 float **read_data(int *rows,int *cols);
 float **clean_delete(float **data, int rows, int cols, int *new_rows);
+float **clean_impute(float **data, int rows, int cols);
+void output_data(float **data, int rows, int cols);
 
 int main(int argc, char *argv[]) 
 {
+    //variable declaration
     int rows, cols;
     int new_rows;
+    float **cleaned_data;
 
+    //creates original data array  
     float **data = read_data(&rows, &cols);
-    float **cleaned_data = clean_delete(data, rows, cols, &new_rows);
 
-    for (int i = 0; i < rows; i++) 
-    {
-        for (int j = 0; j < cols; j++) 
-        {
-            printf("%.2f ", data[i][j]);
-        }
-        printf("\n");
-    }
-    
+    //outputs original data
     printf("\n");
+    output_data(data,rows,cols);
 
-    for (int x = 0; x < new_rows; x++) 
+    //uses deletion strategy if "-d" flag is used
+    if (argc > 1 && strcmp(argv[1], "-d") == 0)
     {
-        for (int y = 0; y < cols; y++) 
-        {
-            printf("%.2f ", cleaned_data[x][y]);
-        }
         printf("\n");
+        cleaned_data = clean_delete(data, rows, cols, &new_rows);
+        output_data(cleaned_data,new_rows,cols);
+    }
+
+    //uses imputation strategy otherwise
+    else
+    {
+        printf("\n");
+        cleaned_data = clean_impute(data, rows, cols); 
+        output_data(cleaned_data,rows,cols);
     }
 
     free(data);
@@ -118,7 +124,7 @@ float **clean_delete(float **data, int rows, int cols, int *new_rows)
     return cleaned_data;
 }
 
-
+//copies the array, replaces NaN values with the average of its column and returns the cleaned array
 float **clean_impute(float **data, int rows, int cols)
 {
     //allocates memory for a new array with cleaned data
@@ -177,7 +183,14 @@ float **clean_impute(float **data, int rows, int cols)
     return cleaned_data;
 }
 
-void output_data(float **data)
+void output_data(float **data, int rows, int cols)
 {
-
+    for (int i = 0; i < rows; i++) 
+        {
+            for (int j = 0; j < cols; j++) 
+            {
+                printf("%.2f ", data[i][j]);
+            }
+            printf("\n");
+        }       
 }
