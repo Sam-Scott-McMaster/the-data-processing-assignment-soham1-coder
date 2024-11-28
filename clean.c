@@ -48,11 +48,25 @@ int main(int argc, char *argv[])
         printf("\n");
         cleaned_data = clean_impute(data, rows, cols); 
         output_data(cleaned_data,rows,cols);
+        new_rows = rows; //imputation does not change # of rows
+    }
+
+    //free memory for original data
+    for (int i = 0; i < rows; i++) 
+    {
+        free(data[i]);
     }
 
     free(data);
+
+    //free memory for cleaned data
+    for (int i = 0; i < new_rows; i++) 
+    {
+        free(cleaned_data[i]);
+    }
+
     free(cleaned_data);
-}
+} 
 
 //reads float values from std input and assigns them to a 2D array then returns it
 float **read_data(int *rows, int *cols)
