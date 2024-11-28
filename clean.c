@@ -1,6 +1,12 @@
-/*Soham Hajariwala, hajariws 11/27/2024
+/*Soham Hajariwala, hajariws 11/28/2024
 
-This program cleans up data which wil be used for machine learning
+This program cleans up data stored in 2D arrays which wil be used for machine learning
+
+2 cleaning options:
+
+deletion strategy which deletes rows with NAN values (must use "-d" flag)
+
+imputation strategy which replaces NAN values with the average of its column (no flag needed)
 
 */
 
@@ -48,7 +54,7 @@ int main(int argc, char *argv[])
     free(cleaned_data);
 }
 
-//reads float values from std input and assigns them to a 2D array
+//reads float values from std input and assigns them to a 2D array then returns it
 float **read_data(int *rows, int *cols)
 {
     scanf("%d %d", rows, cols); //obtains #of rows and columns from user
@@ -80,6 +86,7 @@ float **read_data(int *rows, int *cols)
     return data;
 } 
 
+//takes in a 2D array and outputs it in a nice format
 void output_data(float **data, int rows, int cols)
 {
     for (int i = 0; i < rows; i++) 
